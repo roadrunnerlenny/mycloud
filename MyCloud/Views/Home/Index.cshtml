@@ -1,0 +1,19 @@
+﻿@using MyCloud
+
+<h2>Dirs</h2>
+<ul>
+@foreach (var dirModel in (ViewData["RootDir"] as DirModel).SubDirs) {
+<li> 
+    @dirModel.Dir.Name 
+</li>
+}
+</ul>
+<h2>Files</h2>
+<ul>
+@foreach (var fileModel in (ViewData["RootDir"] as DirModel).Files) {
+<li> @fileModel.File.Name </li>
+}
+</ul>
+
+
+
