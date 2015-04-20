@@ -5,7 +5,7 @@
 <ul>
 @foreach (var dirModel in (ViewData["RootDir"] as DirModel).SubDirs) {
 <li>    
-    @Html.ActionLink(dirModel.Dir.Name,"Browse",dirModel.Dir)
+    @*Html.ActionLink(dirModel.Dir.Name,"Browse",dirModel.Dir)*@
     @*dirModel.Dir.Name *@
 </li>
 }
