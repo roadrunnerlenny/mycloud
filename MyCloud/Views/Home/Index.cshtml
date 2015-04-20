@@ -1,17 +1,22 @@
-﻿@using MyCloud
+﻿@using MyCloud;
+
 
 <h2>Dirs</h2>
 <ul>
-@foreach (var dirModel in (ViewData["RootDir"] as DirModel).SubDirs) {
-<li> 
-    @dirModel.Dir.Name 
-</li>
+    @foreach (var dirModel in (ViewData["RootDir"] as DirModel).SubDirs) {
+        <li>
+            @{ 
+        PathInfo path = new PathInfo() { PathName = dirModel.Dir.FullName };  
+        @Html.ActionLink(dirModel.Dir.Name,"Browse",path);
+            }
+            @*dirModel.Dir.Name *@
+        </li>
 }
 </ul>
 <h2>Files</h2>
 <ul>
-@foreach (var fileModel in (ViewData["RootDir"] as DirModel).Files) {
-<li> @fileModel.File.Name </li>
+    @foreach (var fileModel in (ViewData["RootDir"] as DirModel).Files) {
+        <li>@fileModel.File.Name </li>
 }
 </ul>
 

@@ -11,6 +11,14 @@ namespace MyCloud.Controllers
 	{
 		public ActionResult Index ()
 		{
+			/*
+			var mvcName = typeof(Controller).Assembly.GetName ();
+			var isMono = Type.GetType ("Mono.Runtime") != null;
+
+			ViewData ["Version"] = mvcName.Version.Major + "." + mvcName.Version.Minor;
+			ViewData ["Runtime"] = isMono ? "Mono" : ".NET";
+			*/
+
 			TimeMachine backup = new TimeMachine ();
 			ViewData ["TimeMachine"] = backup;
 			ViewData ["RootDir"] = backup.SparseBundle.Content;
@@ -18,11 +26,6 @@ namespace MyCloud.Controllers
 
 			return View ();
 		}
-
-        public ActionResult Browse(PathInfo pathInfo)
-        {
-            ViewData["RootDir"] = new DirModel(pathInfo.PathName);            return View();
-        }
 
 
 

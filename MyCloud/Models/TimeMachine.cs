@@ -4,7 +4,8 @@ namespace MyCloud
 {
 	public class TimeMachine
 	{
-		public const string _defaultDir = "/Users/Andreas/MonoDevelop/";
+        public const string _defaultDir = @"D:\ALE\mycloud\MyCloud";//"/Users/Andreas/MonoDevelop/";
+
 
 		public SparseBundle SparseBundle { get; set; }
 

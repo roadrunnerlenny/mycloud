@@ -24,7 +24,12 @@ namespace MyCloud
 			
 		}
 
+        public DirModel()
+        {
 
-	}
+        }
+
+
+	}    
 }
 
