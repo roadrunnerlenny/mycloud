@@ -1,27 +1,14 @@
 ﻿@using MyCloud;
-@using System.Web;
-@using System.Net;
 
-<h2>Dirs</h2>
-<ul>
-    @foreach (var dirModel in (ViewData["RootDir"] as DirModel).SubDirs) {
-        <li>
-           @{ 
-           // In a real ASP.NET world,  I would use Html.ActionLink and 
-           // ASP.NET would do rest. Unfortunately, this is mono...
-           string encodedPath = WebUtility.HtmlEncode(@dirModel.Dir.FullName);
-           encodedPath = encodedPath.Replace('/','|'); 
-           }
-            <a href="Home/Browse/?PathName=@encodedPath">@dirModel.Dir.Name</a>
-        </li>
-}
-</ul>
-<h2>Files</h2>
-<ul>
-    @foreach (var fileModel in (ViewData["RootDir"] as DirModel).Files) {
-        <li>@fileModel.File.Name </li>
-}
-</ul>
+<h2>Welcome to MyCloud!</h2>
+<p>
+    @{
+    	var dirModel = (ViewData["RootDir"] as DirModel);
+    }
+    <a href="Home/Browse/?PathName=@dirModel.EncodedFullName">Start browsing in your Time Machine...</a>
+
+ </p>
+
 
 
 
