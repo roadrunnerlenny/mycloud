@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace MyCloud
 {
@@ -9,6 +11,11 @@ namespace MyCloud
 		public SparseBundle (string mountPath)
 		{
 			Content = new DirModel (mountPath);
+		}
+
+		public DirModel FindFolder(string path) {
+			return Content.Find (path);
+
 		}
 	}
 }

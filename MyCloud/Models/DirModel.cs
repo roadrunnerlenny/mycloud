@@ -10,6 +10,13 @@ namespace MyCloud
 	{
 		public DirectoryInfo Dir { get; set; }
 
+		public DirModel Parent { get; set; }  
+		public bool HasParent {
+			get {
+				return Parent != null;
+			}
+		}
+
 		public List<DirModel> SubDirs { get; set; }
 		public List<FileModel> Files { get; set; } 
 
@@ -21,11 +28,20 @@ namespace MyCloud
 			}
 		}
 
-		public string EncodedName {
+		public string EncodedParent {
+			get {
+				if (HasParent)
+					return DirModel.EncodeName (Parent.Dir.FullName);
+				else
+					return "no";
+			}
+		}
+
+		/*public string EncodedName {
 			get {
 				return DirModel.EncodeName (Dir.Name);
 			}
-		}
+		}*/
 
 		public static string EncodeName(string name) 
 		{
@@ -46,11 +62,30 @@ namespace MyCloud
 			Dir = new DirectoryInfo (path);
 
 			SubDirs = Directory.GetDirectories (path)
-				.Select (subDirPath => new DirModel (subDirPath)).ToList ();
+				.Select (subDirPath => new DirModel (subDirPath,this)).ToList ();
 
 			Files = Directory.GetFiles(path)
 				.Select(fileName => new FileModel(fileName)).ToList();
 			
+		}
+
+		public DirModel (string path, DirModel parent) : this(path)
+		{
+			this.Parent = parent;
+		}
+
+		public DirModel Find(string path) {
+			if (Dir.FullName == path)
+				return this;
+			else {
+				DirModel curDir = null;
+				foreach (DirModel subDir in SubDirs) {
+					curDir = subDir.Find (path);
+					if (curDir != null)
+						break;
+				}
+				return curDir;
+			}
 		}
 
       
