@@ -8,6 +8,12 @@ namespace MyCloud
 	{
 		public FileInfo File { get; set; }
 
+		public string EncodedFullName { 
+			get {
+				return MonoHelper.EncodeName (File.FullName);
+			}
+		}
+
 		public FileModel (string fileName)
 		{
 			this.File = new FileInfo (fileName);

@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-using System.Net;
 
 namespace MyCloud
 {
@@ -24,16 +23,16 @@ namespace MyCloud
 		//and this looks like a valid workaround
 		public string EncodedFullName { 
 			get {
-				return DirModel.EncodeName (Dir.FullName);
+				return MonoHelper.EncodeName (Dir.FullName);
 			}
 		}
 
 		public string EncodedParent {
 			get {
 				if (HasParent)
-					return DirModel.EncodeName (Parent.Dir.FullName);
+					return MonoHelper.EncodeName (Parent.Dir.FullName);
 				else
-					return "no";
+					return "No Parent";
 			}
 		}
 
@@ -43,19 +42,7 @@ namespace MyCloud
 			}
 		}*/
 
-		public static string EncodeName(string name) 
-		{
-			string encodedPath = WebUtility.HtmlEncode (name);
-			encodedPath = encodedPath.Replace ('/', '|');
-			return encodedPath;
-		}
 
-		public static string DecodeName(string encodedName) 
-		{
-			string decodedPathName = WebUtility.HtmlDecode (encodedName);
-			decodedPathName = decodedPathName.Replace ('|', '/');
-			return decodedPathName;
-		}
 
 		public DirModel (string path)
 		{
@@ -74,17 +61,31 @@ namespace MyCloud
 			this.Parent = parent;
 		}
 
-		public DirModel Find(string path) {
+		public DirModel FindPath(string path) {
 			if (Dir.FullName == path)
 				return this;
 			else {
-				DirModel curDir = null;
+				DirModel result = null;
 				foreach (DirModel subDir in SubDirs) {
-					curDir = subDir.Find (path);
-					if (curDir != null)
+					result = subDir.FindPath (path);
+					if (result != null)
 						break;
 				}
-				return curDir;
+				return result;
+			}
+		}
+
+		public FileModel FindFile(string fileName) {
+			if (this.Files.Any(f => f.File.FullName == fileName))
+				return Files.Where (f => f.File.FullName == fileName).First();
+			else {
+				FileModel result = null;
+				foreach (DirModel subDir in SubDirs) {
+					result = subDir.FindFile(fileName);
+					if (result != null)
+						break;
+				}
+				return result;
 			}
 		}
 

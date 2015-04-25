@@ -5,25 +5,28 @@
 	@{
 		DirModel rootDir = (ViewData["RootDir"] as DirModel);
 	}
-	<li>
 	@if (rootDir.HasParent) {
-		<a href="/Home/Browse/?PathName=@rootDir.EncodedParent">..</a>
+		<li>
+			<a href="/Home/Browse/?PathName=@rootDir.EncodedParent">..</a>
+		</li>
 	}
-	</li>
+
     @foreach (var dirModel in rootDir.SubDirs) {
         <li>
            @*
            In a real ASP.NET world,  I would use Html.ActionLink and 
            ASP.NET would do rest. Unfortunately, this is mono...
            *@
-            <a href="/Home/Browse/?PathName=@dirModel.EncodedFullName">@dirModel.Dir.Name</a><br />
+            <a href="/Home/Browse/?PathName=@dirModel.EncodedFullName">@dirModel.Dir.Name</a>
          </li>
 }
 </ul>
 <h2>Files</h2>
 <ul>
     @foreach (var fileModel in (ViewData["RootDir"] as DirModel).Files) {
-        <li>@fileModel.File.Name </li>
+        <li>
+        	<a href="/Home/Download/?FileName=@fileModel.EncodedFullName">@fileModel.File.Name </a>
+    	</li>
 }
 </ul>
 
