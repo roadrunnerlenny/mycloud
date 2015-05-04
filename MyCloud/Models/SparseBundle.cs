@@ -13,15 +13,16 @@ namespace MyCloud
 			Content = new DirModel (mountPath);
 		}
 
+		/*
 		public DirModel FindFolder(string path) {
 			return Content.FindPath (path);
-
 		}
 
 		public FileModel FindFile (string fileName)
 		{
 			return Content.FindFile (fileName);
 		}
+		*/
 	}
 }
 

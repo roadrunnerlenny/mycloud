@@ -3,6 +3,8 @@ using System.Net;
 
 namespace MyCloud
 {
+	//No, this encoding is not a joke. This is serious. Mono still has a huge flaw in ASP.NET
+	//and this looks like a valid workaround
 	public class MonoHelper
 	{
 		public static string EncodeName(string name) 
