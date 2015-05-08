@@ -4,10 +4,14 @@
 <p>
     @{
     	var dirModel = (ViewData["RootDir"] as DirModel);
+    	string url = "Home/Browse/?PathName="+dirModel.EncodedFullName;
+    	if (Request.Url.AbsoluteUri.ToLower().EndsWith("home") || Request.Url.AbsoluteUri.ToLower().EndsWith("home/")) {
+    		 url = "Browse/?PathName="+dirModel.EncodedFullName;
+		}
     }
-    <a href="Home/Browse/?PathName=@dirModel.EncodedFullName">Start browsing in your Time Machine...</a>
-
- </p>
+    <a href="@url">Start browsing in your Time Machine...</a>
+    @Request.Url.AbsoluteUri;
+  </p>
 
 
 

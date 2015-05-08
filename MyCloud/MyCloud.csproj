@@ -30,6 +30,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="AfterBuild" command="rm ${SolutionDir}/MyCloud/bin/Microsoft.Web.Infrastructure.dll" />
+      </CustomCommands>
+    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -87,7 +92,6 @@
     <Compile Include="Models\SparseBundle.cs" />
     <Compile Include="Models\DirModel.cs" />
     <Compile Include="Models\FileModel.cs" />
-    <Compile Include="Models\TimeMachine.cs" />
     <Compile Include="Models\MonoHelper.cs" />
   </ItemGroup>
   <ItemGroup>

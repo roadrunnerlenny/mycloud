@@ -16,10 +16,10 @@ namespace MyCloud.Controllers
 
 		public ActionResult Index ()
 		{
-			TimeMachine backup;
-			backup = new TimeMachine ();
+			SparseBundle backup;
+			backup = new SparseBundle ();
 			ViewData ["TimeMachine"] = backup;
-			ViewData ["RootDir"] = backup.SparseBundle.Content;
+			ViewData ["RootDir"] = backup.Content;
 
 			return View ();
 		}

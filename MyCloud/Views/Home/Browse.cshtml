@@ -1,34 +1,71 @@
 ﻿@using MyCloud;
 
 <h2>Dirs</h2>
-<ul>
+<table id="fancytable">
+	<thead>
+	<tr>
+		<th>Name</th>
+		<th>Size</th>
+		<th>CreationDate</th>
+		<th>LastWriteTime</th>
+		<th>LastAccessTime</th>
+	</tr>
+	</thead>
 	@{
 		DirModel rootDir = (ViewData["RootDir"] as DirModel);
 	}
 	@if (rootDir.HasParent) {
-		<li>
-			<a href="/Home/Browse/?PathName=@rootDir.EncodedParent">..</a>
-		</li>
+		<tr>
+			<td><a href="?PathName=@rootDir.EncodedParent">..</a></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
 	}
 
-    @foreach (var dirModel in rootDir.SubDirs) {
-        <li>
-           @*
-           In a real ASP.NET world,  I would use Html.ActionLink and 
-           ASP.NET would do rest. Unfortunately, this is mono...
-           *@
-            <a href="/Home/Browse/?PathName=@dirModel.EncodedFullName">@dirModel.Dir.Name</a>
-         </li>
-}
-</ul>
+	@{
+	bool odd = false;
+    foreach (var dirModel in rootDir.SubDirs) {
+    	odd = !odd;
+    	<tr class="@(odd?"alt":"")">
+        	<td><a href="?PathName=@dirModel.EncodedFullName">@dirModel.Dir.Name</a></td>
+        	<td></td>
+        	<td>@dirModel.Dir.CreationTime</td>
+        	<td>@dirModel.Dir.LastWriteTime</td>
+        	<td>@dirModel.Dir.LastAccessTime</td>
+        </tr>
+       
+    	
+    	}
+    }
+
+</table>
 <h2>Files</h2>
-<ul>
-    @foreach (var fileModel in (ViewData["RootDir"] as DirModel).Files) {
-        <li>
-        	<a href="/Home/Download/?FileName=@fileModel.EncodedFullName">@fileModel.File.Name </a>
-    	</li>
+<table id="fancytable">
+	<thead>
+	<tr>
+		<th>Name</th>
+		<th>Size</th>
+		<th>CreationDate</th>
+		<th>LastWriteTime</th>
+		<th>LastAccessTime</th>
+	</tr>
+	</thead>
+	@{
+	odd = false;
+    foreach (var fileModel in (ViewData["RootDir"] as DirModel).Files) {
+    	odd = !odd;
+        <tr class="@(odd?"alt":"")">
+        	<td><a href="../Download/?FileName=@fileModel.EncodedFullName">@fileModel.File.Name </a></td>
+        	<td>@fileModel.File.Length</td>
+        	<td>@fileModel.File.CreationTime</td>
+        	<td>@fileModel.File.LastWriteTime</td>
+        	<td>@fileModel.File.LastAccessTime</td>
+    	</tr>
+    	}
 }
-</ul>
+</table>
 
 
 
