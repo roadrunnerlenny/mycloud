@@ -37,20 +37,26 @@ namespace MyCloud
 		public DirModel (string path)
 		{
 			Dir = new DirectoryInfo (path);
-
-			SubDirs = Directory.GetDirectories (path)
-				.Select (subDirPath => new DirModel (subDirPath,this)).ToList ();
-
-			Files = Directory.GetFiles(path)
-				.Select(fileName => new FileModel(fileName)).ToList();
+			if (Dir.Parent != null && Dir.Parent.Exists)
+				Parent = new DirModel (Dir.Parent.FullName);
 
 		}
 
-		public DirModel (string path, DirModel parent)
+		/*public DirModel (string path)
 		{
-			this.Parent = parent;
 			Dir = new DirectoryInfo (path);
 			Files = Directory.GetFiles(path)
+				.Select(fileName => new FileModel(fileName)).ToList();
+		}*/
+
+		public void LoadSubDirs() {
+			SubDirs = Directory.GetDirectories (Dir.FullName)
+				.Select (subDirPath => new DirModel (subDirPath)).ToList ();
+
+		}
+
+		public void LoadFiles() {
+			Files = Directory.GetFiles(Dir.FullName)
 				.Select(fileName => new FileModel(fileName)).ToList();
 		}
 

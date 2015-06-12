@@ -31,8 +31,10 @@ namespace MyCloud.Controllers
 			string decodedPathName = MonoHelper.DecodeName (pathName);
 
 			//ViewData["RootDir"] = backup.SparseBundle.FindFolder(decodedPathName);
-			ViewData["RootDir"] = new DirModel(decodedPathName);
-
+			var root = new DirModel(decodedPathName);
+			root.LoadSubDirs ();
+			root.LoadFiles ();
+			ViewData ["RootDir"] = root;
 			return View();
         }
 
