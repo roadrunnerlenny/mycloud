@@ -12,7 +12,6 @@ namespace MyCloud.Controllers
 {
 	public class HomeController : Controller
 	{
-		//public static TimeMachine backup;
 
 		public ActionResult Index ()
 		{
@@ -30,7 +29,6 @@ namespace MyCloud.Controllers
 
 			string decodedPathName = MonoHelper.DecodeName (pathName);
 
-			//ViewData["RootDir"] = backup.SparseBundle.FindFolder(decodedPathName);
 			var root = new DirModel(decodedPathName);
 			root.LoadSubDirs ();
 			root.LoadFiles ();
@@ -43,17 +41,9 @@ namespace MyCloud.Controllers
 			string fileName = Request ["FileName"];
 			string decodedFileName = MonoHelper.DecodeName (fileName);
 
-			//FileModel downloadFile = backup.SparseBundle.FindFile (decodedFileName);
 			FileModel downloadFile = new FileModel (decodedFileName);
-
-
 			return File (downloadFile.File.FullName, "application/octet-stream", downloadFile.File.Name);
 		}
-
-
-
-
-
 	}
 }
 

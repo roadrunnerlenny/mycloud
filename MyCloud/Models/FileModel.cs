@@ -8,6 +8,12 @@ namespace MyCloud
 	{
 		public FileInfo File { get; set; }
 
+		public string SizeInMB { 
+			get {
+				return (Math.Round( (decimal)File.Length / (decimal)(1024*1024),2)).ToString() + " MB";
+			}
+		}
+
 		public string EncodedFullName { 
 			get {
 				return MonoHelper.EncodeName (File.FullName);

@@ -41,14 +41,7 @@ namespace MyCloud
 				Parent = new DirModel (Dir.Parent.FullName);
 
 		}
-
-		/*public DirModel (string path)
-		{
-			Dir = new DirectoryInfo (path);
-			Files = Directory.GetFiles(path)
-				.Select(fileName => new FileModel(fileName)).ToList();
-		}*/
-
+			
 		public void LoadSubDirs() {
 			SubDirs = Directory.GetDirectories (Dir.FullName)
 				.Select (subDirPath => new DirModel (subDirPath)).ToList ();
@@ -59,56 +52,7 @@ namespace MyCloud
 			Files = Directory.GetFiles(Dir.FullName)
 				.Select(fileName => new FileModel(fileName)).ToList();
 		}
-
-		/*
-		public DirModel (string path)
-		{
-			Dir = new DirectoryInfo (path);
-
-			SubDirs = Directory.GetDirectories (path)
-				.Select (subDirPath => new DirModel (subDirPath,this)).ToList ();
-
-			Files = Directory.GetFiles(path)
-				.Select(fileName => new FileModel(fileName)).ToList();
 			
-		}
-
-		public DirModel (string path, DirModel parent) : this(path)
-		{
-			this.Parent = parent;
-		}
-
-		public DirModel FindPath(string path) {
-			if (Dir.FullName == path)
-				return this;
-			else {
-				DirModel result = null;
-				foreach (DirModel subDir in SubDirs) {
-					result = subDir.FindPath (path);
-					if (result != null)
-						break;
-				}
-				return result;
-			}
-		}
-
-		public FileModel FindFile(string fileName) {
-			if (this.Files.Any(f => f.File.FullName == fileName))
-				return Files.Where (f => f.File.FullName == fileName).First();
-			else {
-				FileModel result = null;
-				foreach (DirModel subDir in SubDirs) {
-					result = subDir.FindFile(fileName);
-					if (result != null)
-						break;
-				}
-				return result;
-			}
-		}
-		*/
-
-      
-
 
 	}    
 }

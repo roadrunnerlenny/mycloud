@@ -3,22 +3,34 @@ using System.Net;
 
 namespace MyCloud
 {
-	//No, this encoding is not a joke. This is serious. Mono still has a huge flaw in ASP.NET
+	//No, this encoding is not a joke. This is serious. Mono still has quite some flaws in ASP.NET
 	//and this looks like a valid workaround
 	public class MonoHelper
 	{
-		public static string EncodeName(string name) 
+		public static string EncodeName(string s) 
 		{
-			string encodedPath = WebUtility.HtmlEncode (name);
-			encodedPath = encodedPath.Replace ('/', '|');
-			return encodedPath;
+			s = WebUtility.HtmlEncode (s);
+			s = EncodeSpecial (s);
+			return s;
 		}
 
-		public static string DecodeName(string encodedName) 
+		public static string DecodeName(string s) 
 		{
-			string decodedPathName = WebUtility.HtmlDecode (encodedName);
-			decodedPathName = decodedPathName.Replace ('|', '/');
-			return decodedPathName;
+			s = DecodeSpecial (s);
+			s = WebUtility.HtmlDecode (s);
+			return s;
+		}
+
+		public static string EncodeSpecial(string s) {
+			s = s.Replace ('/', '|');
+			s = s.Replace ("&#", ":");
+			return s;
+		}
+
+		public static string DecodeSpecial(string s) {
+			s = s.Replace ('|', '/');
+			s = s.Replace (":", "&#");
+			return s;
 		}
 
 		public MonoHelper ()

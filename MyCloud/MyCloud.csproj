@@ -105,6 +105,16 @@
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
+    <Content Include="Content\audio.png" />
+    <Content Include="Content\document.png" />
+    <Content Include="Content\folder.png" />
+    <Content Include="Content\image.png" />
+    <Content Include="Content\unknown.png" />
+    <Content Include="Content\video.png" />
+    <Content Include="Content\xml.png" />
+    <Content Include="Content\zip.png" />
+    <None Include="Content\DefaultDir.txt" />
+    <Content Include="Content\cloud.png" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

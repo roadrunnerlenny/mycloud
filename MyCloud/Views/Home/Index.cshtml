@@ -5,12 +5,16 @@
     @{
     	var dirModel = (ViewData["RootDir"] as DirModel);
     	string url = "Home/Browse/?PathName="+dirModel.EncodedFullName;
+    	string imageurl = "Content/cloud.png";
     	if (Request.Url.AbsoluteUri.ToLower().EndsWith("home") || Request.Url.AbsoluteUri.ToLower().EndsWith("home/")) {
     		 url = "Browse/?PathName="+dirModel.EncodedFullName;
+    		 imageurl = "../Content/cloud.png";
 		}
     }
-    <a href="@url">Start browsing in your Time Machine...</a>
-    @Request.Url.AbsoluteUri;
+    <div align="center">
+    <img src="@imageurl" /><br />
+    <a href="@url">Hello! Click here to start browsing in your Time Machine...</a>
+    </div>
   </p>
 
 
